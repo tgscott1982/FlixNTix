@@ -146,7 +146,7 @@ public class ApplicationDbInitializer
                             EndDate = DateTime.Now.AddDays(10),
                             TheaterId = 3,
                             ProducerId = 3,
-                            MovieCategory = MovieCategory.Documentary
+                            MovieCategory = MovieCategory.SciFi
                         },
                         new Movie()
                         {
@@ -158,7 +158,7 @@ public class ApplicationDbInitializer
                             EndDate = DateTime.Now.AddDays(3),
                             TheaterId = 1,
                             ProducerId = 1,
-                            MovieCategory = MovieCategory.Action
+                            MovieCategory = MovieCategory.Drama
                         },
                         new Movie()
                         {

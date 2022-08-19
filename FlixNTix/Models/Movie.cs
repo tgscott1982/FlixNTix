@@ -1,10 +1,11 @@
-﻿using FlixNTix.Data.Enums;
+﻿using FlixNTix.Data.Base;
+using FlixNTix.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FlixNTix.Models;
 
-public class Movie
+public class Movie : IEntityBase
 {
     [Key]
     public int Id { get; set; }
