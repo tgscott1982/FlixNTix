@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IActorService, ActorService>();
+builder.Services.AddScoped<IProducerService, ProducerService>();
 
 
 //DbContext configuration

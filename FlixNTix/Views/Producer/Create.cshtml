@@ -1,18 +1,18 @@
-﻿@model Actor
+﻿@model Producer
 
 @{
-    ViewData["Title"] = "Add A New Actor";
+    ViewData["Title"] = "Add A New Producer";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2 text-white">
         <p>
-            <h1 class="text-center">Add A New Actor</h1>
+            <h1 class="text-center">Add A New Producer</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
                 <form asp-action="Create">
-                   <div asp-validation-summary="ModelOnly" class="text-warning"></div>
+                    <div asp-validation-summary="ModelOnly" class="text-warning"></div>
                     <div class="form-group text-center" style="margin-top: 10px">
                         <img id="ProfilePicturePreview" class="border-info rounded-circle" style="max-width: 150px" />
                     </div>
@@ -45,7 +45,7 @@
 @section Scripts{
     <script>
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             var output = document.getElementById('ProfilePicturePreview');
             output.src = $("#ProfilePictureURL").val();
         })

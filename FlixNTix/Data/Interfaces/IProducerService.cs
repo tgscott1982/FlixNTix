@@ -3,7 +3,6 @@ using FlixNTix.Models;
 
 namespace FlixNTix.Data.Interfaces;
 
-public interface IActorService:IEntityBaseRepository<Actor>
+public interface IProducerService:IEntityBaseRepository<Producer>
 {
-
 }
