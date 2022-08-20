@@ -7,6 +7,8 @@ namespace FlixNTix.Models;
 
 public class NewMovieVM
 {
+    public int Id { get; set; }
+
     [Display(Name = "Movie name")]
     [Required(ErrorMessage ="Name is required")]
 

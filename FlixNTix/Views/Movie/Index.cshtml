@@ -18,11 +18,11 @@
                         <div class="card-header text-white bg-secondary">
                             <p class="card-text">
                                 <h5 class="card-title">
-@*                                    @item.Name
-                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                                    {
+                                    @item.Name
+                                 @*   @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {*@
                                         <a class="text-white float-end" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-                                    }*@
+                                    @*}*@
                                 </h5>
                             </p>
                         </div>
@@ -75,3 +75,5 @@
         </div>
     }
 </div>
+
+@await Html.PartialAsync("_CreateItem", "Movie")
