@@ -1,4 +1,5 @@
 ﻿using FlixNTix.Data;
+using FlixNTix.Data.ViewModels;
 using FlixNTix.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,14 +17,34 @@ public class AccountController : Controller
         _context = context;
     }
 
-    public AccountController()
+    public IActionResult Login()
     {
-
+        return View(new LoginVM());
     }
 
-
-    public IActionResult Index()
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginVM loginVM)
     {
-        return View();
+        if (!ModelState.IsValid) return View(loginVM);
+
+        var user = await _userManager.FindByEmailAsync(loginVM.EmailAddress);
+
+        if(user != null)
+        {
+            var passwordCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
+            if (passwordCheck)
+            {
+                var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Movie");
+                }
+            }
+            TempData["Error"] = "The User Name Or Password Is Incorrect. Please Try Again!";
+            return View(loginVM);
+        }
+
+        TempData["Error"] = "The User Name Or Password Is Incorrect. Please Try Again!";
+        return View(loginVM);
     }
 }
