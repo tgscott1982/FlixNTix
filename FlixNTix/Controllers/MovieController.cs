@@ -21,6 +21,19 @@ public class MovieController : Controller
         return View(allMovies);
     }
 
+    public async Task<IActionResult> Filter(string searchString)
+    {
+        var allMovies = await _service.GetAllAsync(n => n.Theater);
+
+        if (!string.IsNullOrEmpty(searchString))
+        {
+            var filteredResult = allMovies.Where(n => n.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase) || 
+            n.Description.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+            return View("Index", filteredResult);
+        }
+        return View("NotFound");
+    }
+
     //get - movies/details
 
     public async Task<IActionResult> Details(int id)
@@ -111,7 +124,7 @@ public class MovieController : Controller
     }
     public IActionResult Privacy()
     {
-        ViewData["Wecome"] = "Welcome To The Vault";
+        ViewData["Welcome"] = "Welcome To The Vault";
         ViewBag.Description = "This Is How We Do";
         return View();
     }

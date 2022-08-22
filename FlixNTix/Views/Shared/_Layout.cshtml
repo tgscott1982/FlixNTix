@@ -35,10 +35,26 @@
                             </div>
                         </li>
                     </ul>
-                    <form class="input-group-text" asp-controller="Movie" asp-action="Filter" style="padding-right: 10px;">
+                    <form class="input-group-text mx-3" asp-controller="Movie" asp-action="Filter">
                         <input name="searchString" type="text" class="form-control" placeholder="Search for a movie...">
-                        <button class="btn btn-secondary btn-outline-white float-sm-end" type="submit"><i class="bi bi-search "></i></button>
+                        <button class="btn btn-secondary btn-outline-white float-sm-end" type="submit"><i class="bi bi-search "></i></button> 
                     </form>
+                    <ul class="navbar-nav">
+                        @await Component.InvokeAsync("ShoppingCartSummary")
+                    </ul>
+                    @*User Profile Section*@
+                    <div class="dropdown px-3">
+                        <button class="btn btn-outline-info dropdown-toggle" type="button" id="profile-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person"></i> Hello User
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="profile-btn">
+                            <li>
+                                <a class="dropdown-item" asp-controller="Order" asp-action="Index">
+                                    <i class="bi bi-list"></i> Orders
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>

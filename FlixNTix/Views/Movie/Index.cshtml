@@ -62,10 +62,8 @@
                                     <i class="bi bi-info-circle" style="padding-right: 2px"sty></i> Show Details
                                 </a>
                                 <a class="btn btn-info text-white @((DateTime.Now > item.EndDate) ? "disabled" : "")"
-                               asp-controller="Orders"
-                               asp-action="AddItemToShoppingCart"
-                               asp-route-id="@item.Id">
-                                    <i class="bi bi-cart-plus float-start"></i> Add to Cart (Price @item.Price.ToString("c"))
+                               asp-controller="Order" asp-action="AddItemToShoppingCart" asp-route-id="@item.Id">
+                                    <i class="bi bi-cart-plus float-start"></i> Add To Cart (Price @item.Price.ToString("c"))
                                 </a>
                             </p>
                         </div>

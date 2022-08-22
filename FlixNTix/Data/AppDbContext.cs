@@ -1,9 +1,13 @@
 ﻿using FlixNTix.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlixNTix.Data;
 
-public class ApplicationDbContext : DbContext
+
+//identity note - don't forget to install identity.entityframeworkcore package before switching things to implement identity
+
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -31,5 +35,11 @@ public class ApplicationDbContext : DbContext
     public DbSet<Actor_Movie> Actors_Movies { get; set; }
     public DbSet<Theater> Theaters { get; set; }
     public DbSet<Producer> Producers { get; set; }
+
+    //orders-related tables
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+    
 
 }
