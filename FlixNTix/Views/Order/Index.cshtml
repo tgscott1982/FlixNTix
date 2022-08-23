@@ -1,25 +1,29 @@
 ﻿@model List<Order>
 
-    @{
-        ViewData["Title"] = "All Orders";
-    }
+@{
+    ViewData["Title"] = "All Orders";
+}
 
-    <div class="row">
-        <div class="col-md-8 offset-2 text-white">
-            <p>
-                <h4>List Of All Your Orders</h4>
-            </p>
-            <table class="table text-white">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Items</th>
-                        <th>Total</th>
+<div class="row">
+    <div class="col-md-8 offset-2 text-white">
+        <p>
+            <h4>List Of All Your Orders</h4>
+        </p>
+        <table class="table text-white">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
                         <th>User</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var order in Model)
+
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
                 {
                     <tr>
                         <td class="align-middle">@order.Id</td>
@@ -38,10 +42,14 @@
                         <td class="align-middle">
                             @order.OrderItems.Select(m => m.Movie.Price*m.Amount).Sum().ToString("c")
                         </td>
-                        <td class="align-middle"> - </td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td class="align-middle"> @order.User.FullName </td>
+
+                        }
                     </tr>
                 }
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
+</div>
