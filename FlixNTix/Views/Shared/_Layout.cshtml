@@ -23,28 +23,34 @@
                         <li class="nav-item">
                             <a class="nav-link text-light fs-5" asp-area="" asp-controller="Movie" asp-action="Index"><i class="bi bi-film"></i> Movies</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle fs-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-gear"></i> Management
-                            </a>
 
-                            <div class="dropdown-menu bg-secondary border-white" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item fw-bold" asp-controller="Theater" asp-action="Index"><i class="bi bi-camera-reels"></i> Theaters</a>
-                                <a class="dropdown-item fw-bold" asp-controller="Producer" asp-action="Index"><i class="bi bi-headset"></i> Producers</a>
-                                <a class="dropdown-item fw-bold" asp-controller="Actor" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a>
-                            </div>
-                        </li>
+                        @if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle fs-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-gear"></i> Management
+                                </a>
+
+                                <div class="dropdown-menu bg-secondary border-white" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item fw-bold" asp-controller="Theater" asp-action="Index"><i class="bi bi-camera-reels"></i> Theaters</a>
+                                    <a class="dropdown-item fw-bold" asp-controller="Producer" asp-action="Index"><i class="bi bi-headset"></i> Producers</a>
+                                    <a class="dropdown-item fw-bold" asp-controller="Actor" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a>
+                                </div>
+                            </li>
+                        }
+                        
                     </ul>
+
                     <form class="input-group-text m-2" asp-controller="Movie" asp-action="Filter">
                         <input name="searchString" type="text" class="form-control" placeholder="Search for a movie...">
                         <button class="btn btn-secondary btn-outline-white float-sm-end" type="submit"><i class="bi bi-search "></i></button> 
                     </form>
+
                     <ul class="navbar-nav">
                         @await Component.InvokeAsync("ShoppingCartSummary")
                     </ul>
-                    @*@await Html.RenderPartialAsync("_Identity")*@
-                        @*below is another way of doing the above*@
-                    <partial name ="_Identity.cshtml" />
+                    @*@await Html.RenderPartialAsync("_Identity")*@                     
+                    <partial name="_Identity.cshtml" />  @*this is another way of doing the above line*@
                 </div>
             </div>
         </nav>
