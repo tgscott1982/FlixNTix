@@ -1,0 +1,37 @@
+﻿@inject UserManager<ApplicationUser> UserManager;
+
+
+
+@*Identity Buttons*@
+@*note to self - views preceded with an underscore are typically a way of identifying a "partial view"*@
+@if(!User.Identity.IsAuthenticated)
+{
+    <a class="btn btn-outline-success m-2" asp-controller="Account" asp-action="Login">
+        <i class="bi bi-box-arrow-in-right"></i>  Log In
+    </a>
+    <a class="btn btn-outline-info m-2" asp-controller="Account" asp-action="Register">
+    <i class="bi bi-person-plus"></i>  Register
+</a>
+
+}else 
+{
+    @*User Profile Section*@
+    <div class="dropdown px-3">
+        <button class="btn btn-outline-info dropdown-toggle" type="button" id="profile-btn" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person"></i> Hello @UserManager.GetUserName(User)
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="profile-btn">
+            <li>
+                <a class="dropdown-item" asp-controller="Order" asp-action="Index">
+                    <i class="bi bi-list"></i> Orders
+                </a>
+            </li>
+        </ul>
+    </div>
+    <form asp-controller="Account" asp-action="Logout">
+        <button class="btn btn-outline-danger m-2">
+            <i class="bi bi-box-arrow-left"></i>  Logout
+        </button>
+    </form>
+}
+
