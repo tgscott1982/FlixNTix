@@ -1,10 +1,13 @@
 ﻿using FlixNTix.Data;
 using FlixNTix.Data.Interfaces;
 using FlixNTix.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlixNTix.Controllers;
+
+[Authorize]
 public class ProducerController : Controller
 {
     private readonly IProducerService _service;
@@ -14,6 +17,9 @@ public class ProducerController : Controller
         _service = service;
     }
 
+    //index
+    [AllowAnonymous]
+
     public async Task<IActionResult> Index()
     {
         var allProducers = await _service.GetAllAsync();
@@ -21,6 +27,7 @@ public class ProducerController : Controller
     }
 
     //get - producer/details
+    [AllowAnonymous]
 
     public async Task<IActionResult> Details(int id)
     {

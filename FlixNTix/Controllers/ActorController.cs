@@ -1,12 +1,16 @@
 ﻿using FlixNTix.Data;
 using FlixNTix.Data.Interfaces;
 using FlixNTix.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlixNTix.Controllers;
+
+[Authorize]
 public class ActorController : Controller
 {
+
     private readonly IActorService _service;
 
     public ActorController(IActorService service)
@@ -14,6 +18,7 @@ public class ActorController : Controller
         _service = service;
     }
 
+    [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
         var allActors = await _service.GetAllAsync();
@@ -38,6 +43,7 @@ public class ActorController : Controller
     }
 
     //get: actor/details
+    [AllowAnonymous]
 
     public async Task<IActionResult> Details(int id)
     {

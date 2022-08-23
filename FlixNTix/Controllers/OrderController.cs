@@ -2,10 +2,13 @@
 using FlixNTix.Data.Interfaces;
 using FlixNTix.Data.Repositories;
 using FlixNTix.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace FlixNTix.Controllers;
+
+[Authorize]
 public class OrderController : Controller
 {
     private readonly IMovieService _movieService;

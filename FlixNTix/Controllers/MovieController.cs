@@ -1,12 +1,15 @@
 ﻿using FlixNTix.Data;
 using FlixNTix.Data.Interfaces;
 using FlixNTix.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace FlixNTix.Controllers;
+
+[Authorize]
 public class MovieController : Controller
 {
     private readonly IMovieService _service;
@@ -15,11 +18,17 @@ public class MovieController : Controller
         _service = service;
     }
 
+    //index
+    [AllowAnonymous]
+
     public async Task<IActionResult> Index()
     {
         var allMovies = await _service.GetAllAsync(n => n.Theater);
         return View(allMovies);
     }
+
+    //search filer
+    [AllowAnonymous]
 
     public async Task<IActionResult> Filter(string searchString)
     {
@@ -35,6 +44,8 @@ public class MovieController : Controller
     }
 
     //get - movies/details
+    [AllowAnonymous]
+
 
     public async Task<IActionResult> Details(int id)
     {
@@ -122,12 +133,18 @@ public class MovieController : Controller
         await _service.UpdateMovieAsync(movie);
         return RedirectToAction(nameof(Index));
     }
+
+    //privacy and error views
+    [AllowAnonymous]
+
     public IActionResult Privacy()
     {
         ViewData["Welcome"] = "Welcome To The Vault";
         ViewBag.Description = "This Is How We Do";
         return View();
     }
+
+    [AllowAnonymous]
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
