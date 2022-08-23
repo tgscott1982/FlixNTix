@@ -4,6 +4,7 @@ using FlixNTix.Data.ViewModels;
 using FlixNTix.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlixNTix.Controllers;
 public class AccountController : Controller
@@ -16,6 +17,12 @@ public class AccountController : Controller
         _userManager = userManager;
         _signInManager = signInManager;
         _context = context;
+    }
+
+    public async Task<IActionResult> Users()
+    {
+        var users = await _context.Users.ToListAsync();
+        return View(users);
     }
 
     public IActionResult Login()
