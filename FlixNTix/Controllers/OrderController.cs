@@ -1,6 +1,7 @@
 ﻿using FlixNTix.Data.Cart;
 using FlixNTix.Data.Interfaces;
 using FlixNTix.Data.Repositories;
+using FlixNTix.Data.Static;
 using FlixNTix.Data.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

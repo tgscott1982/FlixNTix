@@ -1,12 +1,13 @@
 ﻿using FlixNTix.Data;
 using FlixNTix.Data.Interfaces;
+using FlixNTix.Data.Static;
 using FlixNTix.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlixNTix.Controllers;
-[Authorize]
+[Authorize(Roles = UserRoles.Admin)]
 public class TheaterController : Controller
 {
     private readonly ITheaterService _service;

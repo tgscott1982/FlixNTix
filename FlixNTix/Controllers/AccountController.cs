@@ -97,4 +97,9 @@ public class AccountController : Controller
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Movie");
     }
+
+    public IActionResult AccessDenied(string ReturnUrl)
+    {
+        return View();
+    }
 }

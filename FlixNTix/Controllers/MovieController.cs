@@ -1,5 +1,6 @@
 ﻿using FlixNTix.Data;
 using FlixNTix.Data.Interfaces;
+using FlixNTix.Data.Static;
 using FlixNTix.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ using System.Diagnostics;
 
 namespace FlixNTix.Controllers;
 
-[Authorize]
+[Authorize(Roles = UserRoles.Admin)]
 public class MovieController : Controller
 {
     private readonly IMovieService _service;
